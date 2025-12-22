@@ -31,6 +31,13 @@ const router = express.Router();
  *         googleMapsLink:
  *           type: string
  *           description: Link Google Maps
+ *         roomPrice:
+ *           type: number
+ *           description: Harga kamar per bulan
+ *         roomStatus:
+ *           type: string
+ *           enum: [available, booked, maintenance]
+ *           description: Status kamar
  *         images:
  *           type: array
  *           items:
@@ -103,6 +110,11 @@ router.get("/place/:id", getPlaceById);
  *                 type: string
  *               googleMapsLink:
  *                 type: string
+ *               roomPrice:
+ *                 type: number
+ *               roomStatus:
+ *                 type: string
+ *                 enum: [available, booked, maintenance]
  *               images:
  *                 type: string
  *                 format: binary
@@ -151,6 +163,11 @@ router.post(
  *                 type: string
  *               googleMapsLink:
  *                 type: string
+ *               roomPrice:
+ *                 type: number
+ *               roomStatus:
+ *                 type: string
+ *                 enum: [available, booked, maintenance]
  *               images:
  *                 type: string
  *                 format: binary

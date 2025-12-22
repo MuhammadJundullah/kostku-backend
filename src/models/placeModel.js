@@ -16,6 +16,15 @@ const placeSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  roomPrice: {
+    type: Number,
+    default: 0,
+  },
+  roomStatus: {
+    type: String,
+    enum: ["available", "booked", "maintenance"],
+    default: "available",
+  },
   image: {
     type: [String],
     default: [],

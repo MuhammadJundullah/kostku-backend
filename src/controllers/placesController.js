@@ -24,7 +24,7 @@ export const getPlaceById = async (req, res) => {
 };
 
 export const createPlace = async (req, res) => {
-  const { name, description, googleMapsLink, address } = req.body;
+  const { name, description, googleMapsLink, address, roomPrice, roomStatus } = req.body;
   const image = req.file ? req.file.filename : null;
 
   try {
@@ -34,6 +34,8 @@ export const createPlace = async (req, res) => {
       googleMapsLink,
       image,
       address,
+      roomPrice: roomPrice ? Number(roomPrice) : 0,
+      roomStatus: roomStatus || "available",
     });
     const savePlace = await places.save();
     return res.status(201).json({ message: "create place", data: savePlace });
@@ -44,7 +46,7 @@ export const createPlace = async (req, res) => {
 
 export const updatePlace = async (req, res) => {
   const placeId = req.params.id;
-  const { name, description, googleMapsLink, address } = req.body;
+  const { name, description, googleMapsLink, address, roomPrice, roomStatus } = req.body;
   const newImage = req.file ? req.file.filename : null;
 
   try {
@@ -57,10 +59,12 @@ export const updatePlace = async (req, res) => {
       uploadRemover(place.image);
     }
 
-    place.name = name;
-    place.address = address;
-    place.description = description;
-    place.googleMapsLink = googleMapsLink;
+    if (name !== undefined) place.name = name;
+    if (address !== undefined) place.address = address;
+    if (description !== undefined) place.description = description;
+    if (googleMapsLink !== undefined) place.googleMapsLink = googleMapsLink;
+    if (roomPrice !== undefined) place.roomPrice = Number(roomPrice);
+    if (roomStatus !== undefined) place.roomStatus = roomStatus;
     place.image = newImage ? newImage : place.image;
 
     const updatedPlace = await place.save();
