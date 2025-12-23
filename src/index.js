@@ -24,7 +24,8 @@ app.use(cors({
     
     const allowedOrigins = [
       'https://find-your-place-frontend.vercel.app',
-      'http://localhost:5173', // Add your local development URL
+      'http://localhost:5173',
+      'https://kostku-teal.vercel.app'
       // Add any other origins you want to allow
     ];
     
